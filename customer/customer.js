@@ -155,7 +155,6 @@ function buildMenu() {
       <div class="menu-card-body">
         <div class="menu-card-name">${dish.name}</div>
         <div class="menu-card-price">$${dish.price.toFixed(2)}</div>
-        <div class="menu-card-hint">Tap to see details &amp; extras</div>
         <button class="add-btn">Add to Cart</button>
       </div>`;
     card.addEventListener("click", e => {

@@ -14,10 +14,10 @@ const CFG = {
 };
 
 const ROLES = {
-  "danielaiscool6128@gmail.com":  "Owner",
+  "jv101607@gmail.com":  "Owner",
   "mateusstavares2008@gmail.com": "Manager",
   "thehecklolwhat15@gmail.com":   "Chef",
-  "jv101607@gmail.com":           "Waiter",
+  "danielaiscool6128@gmail.com":           "Waiter",
 };
 function roleOf(e) { return ROLES[e] || "Staff"; }
 
