@@ -169,63 +169,6 @@ function buildMenu() {
   });
 }
 
-/* ── Food modal ── */
-function openFoodModal(dish) {
-  activeDish = dish;
-  extraQtys  = {};
-  document.getElementById("fmImg").src      = dish.img;
-  document.getElementById("fmName").textContent  = dish.name;
-  document.getElementById("fmPrice").textContent = "$" + dish.price.toFixed(2);
-  document.getElementById("fmDesc").textContent  = dish.desc;
-
-  const grid = document.getElementById("fmExtrasGrid");
-  if (dish.extras?.length) {
-    document.getElementById("fmExtrasSection").style.display = "block";
-    grid.innerHTML = dish.extras.map((ex, i) => `
-      <div class="extra-row">
-        <div><div class="extra-name">${ex.name}</div><div class="extra-price">+$${ex.price.toFixed(2)}</div></div>
-        <div class="extra-qty">
-          <button class="extra-qty-btn" data-ei="${i}" data-dir="-">-</button>
-          <span class="extra-qty-val" id="eqv-${i}">0</span>
-          <button class="extra-qty-btn" data-ei="${i}" data-dir="+">+</button>
-        </div>
-      </div>`).join("");
-    grid.querySelectorAll(".extra-qty-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const i   = parseInt(btn.dataset.ei);
-        const dir = btn.dataset.dir;
-        extraQtys[i] = Math.max(0, (extraQtys[i] || 0) + (dir === "+" ? 1 : -1));
-        document.getElementById(`eqv-${i}`).textContent = extraQtys[i];
-        updateFmTotal();
-      });
-    });
-  } else {
-    document.getElementById("fmExtrasSection").style.display = "none";
-  }
-  updateFmTotal();
-  document.getElementById("foodModalOverlay").classList.add("open");
-}
-
-function updateFmTotal() {
-  if (!activeDish) return;
-  let total = activeDish.price;
-  (activeDish.extras || []).forEach((ex, i) => { total += (extraQtys[i] || 0) * ex.price; });
-  document.getElementById("fmTotal").textContent = "$" + total.toFixed(2);
-}
-
-document.getElementById("fmClose").addEventListener("click", () => document.getElementById("foodModalOverlay").classList.remove("open"));
-document.getElementById("foodModalOverlay").addEventListener("click", e => {
-  if (e.target === document.getElementById("foodModalOverlay")) document.getElementById("foodModalOverlay").classList.remove("open");
-});
-
-document.getElementById("fmAddBtn").addEventListener("click", () => {
-  if (!activeDish) return;
-  const extras = [];
-  (activeDish.extras || []).forEach((ex, i) => { const q = extraQtys[i] || 0; if (q > 0) extras.push({...ex, qty: q}); });
-  addToCart(activeDish, extras);
-  document.getElementById("foodModalOverlay").classList.remove("open");
-  showToast(activeDish.name + " added");
-});
 
 /* ── Cart ── */
 function addToCart(dish, extras) {

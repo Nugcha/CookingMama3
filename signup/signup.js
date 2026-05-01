@@ -38,7 +38,6 @@ function applyTheme(t) {
   document.getElementById("themeIcon").textContent  = t === "dark" ? "Light" : "Dark";
 }
 
-
 /* ── Helpers ── */
 function show(el) { el.style.display = "flex"; }
 function hide(el) { el.style.display = "none"; }
