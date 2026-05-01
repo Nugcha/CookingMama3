@@ -38,23 +38,6 @@ function applyTheme(t) {
   document.getElementById("themeIcon").textContent  = t === "dark" ? "Light" : "Dark";
 }
 
-/* ── Stars ── */
-const starChars  = ["*", "+", "x", "o"];
-const starColors = ["#F48FB1", "#81D4FA", "#A5D6A7", "#FFE082", "#CE93D8"];
-const layer      = document.getElementById("starsLayer");
-const count      = window.innerWidth < 800 ? 8 : 16;
-for (let i = 0; i < count; i++) {
-  const s = document.createElement("span");
-  s.className   = "star";
-  s.textContent = starChars[i % starChars.length];
-  s.style.left  = Math.random() * 100 + "vw";
-  s.style.top   = Math.random() * 100 + "vh";
-  s.style.fontSize        = (0.9 + Math.random() * 1.2) + "rem";
-  s.style.color           = starColors[i % starColors.length];
-  s.style.animationDelay  = (Math.random() * 4) + "s";
-  s.style.animationDuration = (4 + Math.random() * 4) + "s";
-  layer.appendChild(s);
-}
 
 /* ── Helpers ── */
 function show(el) { el.style.display = "flex"; }
